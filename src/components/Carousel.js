@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useMemo } from "react";
 
 export default function Carousel({ search, setSearch }) {
-  const [images, setImages] = React.useState([]);
-
-  const allImages = [
+  // Move allImages outside component or use useMemo to prevent recreation
+  const allImages = useMemo(() => [
     "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=900&h=700&fit=crop", // Burger
     "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=900&h=700&fit=crop", // Pizza
     "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=900&h=700&fit=crop", // Pasta
@@ -16,12 +15,14 @@ export default function Carousel({ search, setSearch }) {
     "https://images.unsplash.com/photo-1573080496987-a199f8cd4054?w=900&h=700&fit=crop", // Fries
     "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=900&h=700&fit=crop", // Fried Chicken
     "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=900&h=700&fit=crop", // Burger 2
-  ];
+  ], []);
+
+  const [images, setImages] = React.useState([]);
 
   React.useEffect(() => {
     const shuffled = [...allImages].sort(() => 0.5 - Math.random());
     setImages(shuffled.slice(0, 3));
-  }, []);
+  }, [allImages]);
 
   if (images.length === 0) return null;
 
