@@ -1,2 +1,5 @@
-// Export the backend app for Vercel serverless
-module.exports = require('../backend/index.js');
+// Import the Express app from the old backend location
+const app = require('../api-old/index.js');
+
+// Export for Vercel serverless
+module.exports = app;
