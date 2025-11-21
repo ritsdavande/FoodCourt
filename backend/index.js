@@ -5,11 +5,12 @@ const mongoDB = require("./db");
 mongoDB();
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   next();
 });
 app.get("/", (req, res) => {
@@ -20,8 +21,11 @@ app.use(express.json());
 app.use("/api", require("./Routes/CreateUser"));
 app.use("/api", require("./Routes/DisplayData"));
 app.use("/api", require("./Routes/OrderData"));
-app.listen(port, () => {
-  console.log(`Example app listening on ${port}`);
-});
+// Only start server in development
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(port, () => {
+    console.log(`Example app listening on ${port}`);
+  });
+}
 
 module.exports = app;
