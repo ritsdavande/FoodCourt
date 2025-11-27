@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Card from "../components/Card";
 import Carousel from "../components/Carousel";
+import API_BASE_URL from "../config/api";
 
 export default function Home() {
   const [foodCat, setFoodCat] = useState([]);
@@ -11,7 +12,7 @@ export default function Home() {
 
   const loadFoodItems = async () => {
     try {
-      let response = await fetch("/api/foodData", {
+      let response = await fetch(`${API_BASE_URL}/api/foodData`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import API_BASE_URL from "../config/api";
 
 export default function Signup() {
   const [credentials, setCredentials] = useState({
@@ -36,7 +37,7 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("/api/createuser", {
+    const response = await fetch(`${API_BASE_URL}/api/createuser`, {
       method: "POST", // corrected casing
       headers: {
         // corrected key

@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useCart, useDispatchCart } from "../components/ContextReducer";
+import API_BASE_URL from "../config/api";
 
 export default function Cart() {
   let data = useCart();
@@ -21,7 +22,7 @@ export default function Cart() {
   const handleCheckOut = async () => {
     let userEmail = localStorage.getItem("userEmail");
     try {
-      let response = await fetch("/api/orderData", {
+      let response = await fetch(`${API_BASE_URL}/api/orderData`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

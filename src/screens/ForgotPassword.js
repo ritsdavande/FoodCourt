@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import API_BASE_URL from "../config/api";
 
 export default function ForgotPassword() {
   const [credentials, setCredentials] = useState({
@@ -13,7 +14,7 @@ export default function ForgotPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/resetpassword", {
+      const response = await fetch(`${API_BASE_URL}/api/resetpassword`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
