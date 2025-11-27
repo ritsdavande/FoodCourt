@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 const mongoDB = require("./db");
 mongoDB();
 
@@ -14,18 +14,16 @@ app.use((req, res, next) => {
   next();
 });
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send("FoodCourt API is running!");
 });
 
 app.use(express.json());
 app.use("/api", require("./Routes/CreateUser"));
 app.use("/api", require("./Routes/DisplayData"));
 app.use("/api", require("./Routes/OrderData"));
-// Only start server in development
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(port, () => {
-    console.log(`Example app listening on ${port}`);
-  });
-}
+
+app.listen(port, () => {
+  console.log(`Backend server listening on port ${port}`);
+});
 
 module.exports = app;
